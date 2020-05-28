@@ -265,6 +265,7 @@ class Gateway {
 			// Redirect.
 			$gateway->redirect( $payment );
 		} catch ( \Exception $e ) {
+		    give_set_error( 'no-payment-method-id', $e->getMessage() );
 			/*
 			 * Record the error.
 			 * /wp-admin/edit.php?post_type=give_forms&page=give-reports&tab=logs&view=gateway_errors
