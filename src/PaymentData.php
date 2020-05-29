@@ -53,6 +53,9 @@ class PaymentData extends Core_PaymentData {
 
 		$this->donation_id = $donation_id;
 		$this->gateway     = $gateway;
+
+		$this->user_info = give_get_payment_meta_user_info( $donation_id );
+		$this->post = get_post( $donation_id );
 	}
 
 	/**
@@ -118,7 +121,7 @@ class PaymentData extends Core_PaymentData {
 	 * @return string
 	 */
 	public function get_order_id() {
-		return $this->donation_id;
+	    return $this->post->post_title;
 	}
 
 	/**
@@ -161,37 +164,29 @@ class PaymentData extends Core_PaymentData {
 	}
 
 	public function get_first_name() {
-		$user_info = give_get_payment_meta_user_info( $this->donation_id );
-
-		if ( isset( $user_info['first_name'] ) ) {
-			return $user_info['first_name'];
+		if ( isset( $this->user_info['first_name'] ) ) {
+			return $this->user_info['first_name'];
 		}
 	}
 
 	public function get_last_name() {
-		$user_info = give_get_payment_meta_user_info( $this->donation_id );
-
-		if ( isset( $user_info['last_name'] ) ) {
-			return $user_info['last_name'];
+		if ( isset( $this->user_info['last_name'] ) ) {
+			return $this->user_info['last_name'];
 		}
 	}
 
 	public function get_customer_name() {
-		$user_info = give_get_payment_meta_user_info( $this->donation_id );
-
-		return $user_info['first_name'] . ' ' . $user_info['last_name'];
+		return $this->user_info['first_name'] . ' ' . $this->user_info['last_name'];
 	}
 
 	public function get_address() {
 		$address = null;
 
-		$user_info = give_get_payment_meta_user_info( $this->donation_id );
-
-		if ( ! empty( $user_info['address'] ) ) {
+		if ( ! empty( $this->user_info['address'] ) ) {
 			$address = sprintf(
 				'%s %s',
-				$user_info['address']['line1'],
-				$user_info['address']['line2']
+				$this->user_info['address']['line1'],
+				$this->user_info['address']['line2']
 			);
 		}
 
@@ -201,10 +196,8 @@ class PaymentData extends Core_PaymentData {
 	public function get_city() {
 		$city = null;
 
-		$user_info = give_get_payment_meta_user_info( $this->donation_id );
-
-		if ( ! empty( $user_info['address'] ) ) {
-			$city = $user_info['address']['city'];
+		if ( ! empty( $this->user_info['address'] ) ) {
+			$city = $this->user_info['address']['city'];
 		}
 
 		return $city;
@@ -213,13 +206,20 @@ class PaymentData extends Core_PaymentData {
 	public function get_zip() {
 		$zip = null;
 
-		$user_info = give_get_payment_meta_user_info( $this->donation_id );
-
-		if ( ! empty( $user_info['address'] ) ) {
-			$zip = $user_info['address']['zip'];
+		if ( ! empty( $this->user_info['address'] ) ) {
+			$zip = $this->user_info['address']['zip'];
 		}
 
 		return $zip;
+	}
+
+	/**
+	 * Get Telephone Number.
+	 *
+	 * @return null|string
+	 */
+	public function get_telephone_number(){
+	    return give_get_meta( $this->donation_id, 'give_phone', true );
 	}
 
 	/**

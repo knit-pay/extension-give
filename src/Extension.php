@@ -56,6 +56,9 @@ class Extension extends AbstractPluginIntegration {
 		$dependencies = $this->get_dependencies();
 
 		$dependencies->add( new GiveDependency() );
+
+		// Add Phone Number field in Give donation form which is mandatory for most of the India Payment Gateways
+		require_once 'custom-fields-phone.php';
 	}
 
 	/**
