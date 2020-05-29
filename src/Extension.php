@@ -98,12 +98,9 @@ class Extension extends AbstractPluginIntegration {
 
 			$classes = array(
 				'Gateway',
-				'BancontactGateway',
 				'BankTransferGateway',
 				'CreditCardGateway',
 				'DirectDebitGateway',
-				'IDealGateway',
-				'SofortGateway',
 			);
 
 			if ( PaymentMethods::is_active( PaymentMethods::GULDEN ) ) {

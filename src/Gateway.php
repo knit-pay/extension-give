@@ -51,7 +51,7 @@ class Gateway {
 	 * @param string $name           Gateway name.
 	 * @param string $payment_method Gateway payment method.
 	 */
-	public function __construct( $id = 'pronamic_pay', $name = 'Pronamic', $payment_method = null ) {
+	public function __construct( $id = 'pronamic_pay', $name = 'Knit Pay', $payment_method = null ) {
 		$this->id             = $id;
 		$this->name           = $name;
 		$this->payment_method = $payment_method;
