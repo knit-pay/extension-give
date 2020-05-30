@@ -100,7 +100,6 @@ class Extension extends AbstractPluginIntegration {
 				'Gateway',
 				'BankTransferGateway',
 				'CreditCardGateway',
-				'DirectDebitGateway',
 			);
 
 			if ( PaymentMethods::is_active( PaymentMethods::GULDEN ) ) {
