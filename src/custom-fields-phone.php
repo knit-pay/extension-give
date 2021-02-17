@@ -13,7 +13,7 @@ function knitpay_give_donations_custom_form_fields( $form_id ) {
     $phone          = ! empty( $give_user_info['give_phone'] ) ? $give_user_info['give_phone'] : '';
     
 		?>
-		<div id="give-phone-wrap" class="form-row form-row-wide">
+		<p id="give-phone-wrap" class="form-row form-row-wide">
 			<label class="give-label" for="give-phone">
 				<?php esc_attr_e( 'Phone Number', 'give' ); ?>
 				<?php if ( give_field_is_required( 'give_phone', $form_id ) ) : ?>
@@ -33,8 +33,7 @@ function knitpay_give_donations_custom_form_fields( $form_id ) {
 				<?php echo( give_field_is_required( 'give_phone', $form_id ) ? ' required aria-required="true" ' : '' ); ?>
 			/>
 			
-			<!-- <textarea class="give-textarea" name="give_phone" id="give-phone"></textarea> -->
-		</div>
+		</p>
 		<?php
 }
 

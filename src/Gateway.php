@@ -108,7 +108,7 @@ class Gateway {
 		$description = '';
 
 		if ( 'pronamic_pay' === $this->id ) {
-			$description = __( "This payment method does not use a predefined payment method for the payment. Some payment providers list all activated payment methods for your account to choose from. Use payment method specific gateways (such as 'iDEAL') to let customers choose their desired payment method at checkout.", 'pronamic_ideal' );
+			$description = __( "This payment method does not use a predefined payment method for the payment. Some payment providers list all activated payment methods for your account to choose from. Use payment method specific gateways (such as 'Instamojo') to let customers choose their desired payment method at checkout.", 'pronamic_ideal' );
 		}
 
 		$settings[] = array(
