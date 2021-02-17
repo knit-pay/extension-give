@@ -83,7 +83,7 @@ class GiveHelper {
 		return CustomerHelper::from_array( array(
 			'name'    => self::get_name_from_user_info( $user_info ),
 			'email'   => \give_get_payment_user_email( $donation_id ),
-			'phone'   => null,
+			'phone'   => \give_get_meta( $donation_id, 'give_phone', true, null ),
 			'user_id' => null,
 		) );
 	}
@@ -117,7 +117,7 @@ class GiveHelper {
 			'region'       => null,
 			'country_code' => null,
 			'email'        => \give_get_payment_user_email( $donation_id ),
-			'phone'        => null,
+			'phone'        => \give_get_meta( $donation_id, 'give_phone', true, null ),
 		) );
 	}
 }

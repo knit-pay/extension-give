@@ -301,11 +301,11 @@ class Gateway {
 
 		$payment->source    = 'give';
 		$payment->source_id = $donation_id;
-		$payment->order_id  = $donation_id;
+		$payment->order_id  = get_post( $donation_id )->post_title;
 
-		$payment->description = GiveHelper::get_description( $this, $donation_id );
+		$payment->description = GiveHelper::get_description( $this, $payment->order_id );
 
-		$payment->title = GiveHelper::get_title( $donation_id );
+		$payment->title = GiveHelper::get_title( $payment->order_id );
 
 		// Customer.
 		$payment->set_customer( GiveHelper::get_customer_from_user_info( $user_info, $donation_id ) );
