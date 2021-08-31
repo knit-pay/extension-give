@@ -121,13 +121,13 @@ class Extension extends AbstractPluginIntegration {
 				// New gateway.
 				$gateway = new Gateway( $id, $payment_method );
 
-				$name = PaymentMethods::get_name( $payment_method, __( 'Pronamic', 'pronamic_ideal' ) );
+				$name = PaymentMethods::get_name( $payment_method, __( 'Knit Pay', 'pronamic_ideal' ) );
 
 				// Admin label.
-				$admin_label = \__( 'Pronamic', 'pronamic_ideal' );
+				$admin_label = \__( 'Knit Pay', 'pronamic_ideal' );
 
 				if ( null !== $payment_method ) {
-					$admin_label = sprintf( '%s - %s', \__( 'Pronamic', 'pronamic_ideal' ), $name );
+					$admin_label = sprintf( '%s - %s', \__( 'Knit Pay', 'pronamic_ideal' ), $name );
 				}
 
 				$this->gateways[ $gateway->id ] = array(
