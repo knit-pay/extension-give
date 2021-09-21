@@ -84,7 +84,7 @@ class Gateway {
 			$title = \sprintf(
 				'%s - %s',
 				$title,
-				PaymentMethods::get_name( $this->payment_method, __( 'Knit Pay', 'pronamic_ideal' ) )
+				PaymentMethods::get_name( $this->payment_method )
 			);
 		}
 
@@ -339,10 +339,10 @@ class Gateway {
 
 			exit;
 		} catch ( \Exception $e ) {
-		    // Display Error on Donation Form
-		    give_set_error( 'no-payment-method-id', $e->getMessage() );
+			// Display Error on Donation Form
+			give_set_error( 'no-payment-method-id', $e->getMessage() );
 			
-		    /*
+			/*
 			 * Record the error.
 			 * /wp-admin/edit.php?post_type=give_forms&page=give-reports&tab=logs&view=gateway_errors
 			 * @link https://github.com/WordImpress/Give/blob/1.3.6/includes/gateways/functions.php#L267-L285

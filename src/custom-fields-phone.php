@@ -9,10 +9,10 @@
 function knitpay_give_donations_custom_form_fields( $form_id ) {
 	
 	// Get user info.
-    $give_user_info = _give_get_prefill_form_field_values( $form_id );
-    $phone          = ! empty( $give_user_info['give_phone'] ) ? $give_user_info['give_phone'] : '';
-    
-		?>
+	$give_user_info = _give_get_prefill_form_field_values( $form_id );
+	$phone          = empty( $give_user_info['give_phone'] ) ? '' : $give_user_info['give_phone'];
+	
+	?>
 		<p id="give-phone-wrap" class="form-row form-row-wide">
 			<label class="give-label" for="give-phone">
 				<?php esc_attr_e( 'Phone Number', 'give' ); ?>
@@ -54,7 +54,7 @@ function knitpay_give_donations_require_fields( $required_fields, $form_id ) {
 			'error_message' => __( 'Please provide correct phone or mobile number.', 'give' ),
 		);
 
-	return $required_fields;
+		return $required_fields;
 }
 
 add_filter( 'give_donation_form_required_fields', 'knitpay_give_donations_require_fields', 10, 2 );
@@ -91,14 +91,16 @@ function knitpay_give_donations_donation_details( $payment_id ) {
 
 	$phone = give_get_meta( $payment_id, 'give_phone', true );
 
-	if ( $phone ) : ?>
+	if ( $phone ) : 
+		?>
 	
-    	<div class="column">
-    		<p><strong><?php esc_html_e( 'Phone Number:', 'give' ); ?></strong>
-    		<?php echo wpautop( $phone ); ?></p>
-    	</div>
+		<div class="column">
+			<p><strong><?php esc_html_e( 'Phone Number:', 'give' ); ?></strong>
+			<?php echo wpautop( $phone ); ?></p>
+		</div>
 
-	<?php endif;
+		<?php 
+	endif;
 
 }
 
@@ -157,7 +159,7 @@ function knitpay_donation_receipt_args( $args, $donation_id, $form_id ) {
 			'display' => empty( $phone ) ? false : true,
 		);
 
-	return $args;
+		return $args;
 }
 
 add_filter( 'give_donation_receipt_args', 'knitpay_donation_receipt_args', 30, 3 );
@@ -171,8 +173,8 @@ function knitpay_donation_standard_donor_fields() {
 	<li>
 		<label for="give-phone">
 			<input type="checkbox" checked
-			       name="give_give_donations_export_option[give_phone]"
-			       id="give-phone"><?php _e( 'Phone Number', 'give' ); ?>
+				   name="give_give_donations_export_option[give_phone]"
+				   id="give-phone"><?php _e( 'Phone Number', 'give' ); ?>
 		</label>
 	</li>
 	<?php
@@ -211,7 +213,7 @@ add_filter( 'give_export_donation_get_columns_name', 'knitpay_update_columns_hea
  */
 function knitpay_export_donation_data( $data, $payment, $columns ) {
 	if ( ! empty( $columns['give_phone'] ) ) {
-		$phone                        = $payment->get_meta( 'give_phone' );
+		$phone              = $payment->get_meta( 'give_phone' );
 		$data['give_phone'] = isset( $phone ) ? wp_kses_post( $phone ) : '';
 	}
 
@@ -230,7 +232,7 @@ add_filter( 'give_export_donation_data', 'knitpay_export_donation_data', 10, 3 )
  */
 function knitpay_export_custom_fields( $responses, $form_id ) {
 
-	if (  ! empty( $responses['standard_fields'] ) ) {
+	if ( ! empty( $responses['standard_fields'] ) ) {
 		$standard_fields = $responses['standard_fields'];
 		if ( in_array( 'give_phone', $standard_fields ) ) {
 			$standard_fields              = array_diff( $standard_fields, array( 'give_phone' ) );

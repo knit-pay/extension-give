@@ -121,7 +121,8 @@ class Extension extends AbstractPluginIntegration {
 				// New gateway.
 				$gateway = new Gateway( $id, $payment_method );
 
-				$name = PaymentMethods::get_name( $payment_method, __( 'Knit Pay', 'pronamic_ideal' ) );
+				$name = PaymentMethods::get_name( $payment_method );
+				$name = empty( $name ) ? \__( 'Pay Online', 'pronamic_ideal' ) : $name; // Added by Knit Pay.
 
 				// Admin label.
 				$admin_label = \__( 'Knit Pay', 'pronamic_ideal' );
